@@ -1,11 +1,14 @@
 import React from 'react'
 import axios from 'axios'
 import TaskContext from '../../utils/TaskContext'
-import TaskForm from '../../components/TaskForm'
 import TaskDisplay from '../../components/TaskDisplay'
 
-class Tasks extends React.Component {
-  state = {
+
+const TableDisplayPage = props => {
+
+  console.log('Profile display page props...', props)
+
+  const [state, setState] = React.useState({
     title: '',
     owner: '',
     task: [],
@@ -18,46 +21,51 @@ class Tasks extends React.Component {
     date: '',
     numbers: '',
     board: '',
-    user: '',
-    inputChange: e => {
-      this.setState({ [e.target.name]: e.target.value })
-    },
-    taskSubmit: e => {
-      e.preventDefault()
-      //this.setState({ [e.target.name]: e.target.value })
-      axios.post(`/api/tables`, {
-        task: this.state.task,
-        assignedTo: this.state.assignedTo,
-        status: this.state.status
-      })
-        .then( ({data}) => {
-          let arr = JSON.parse(JSON.stringify(this.state.tasks))
-          arr.push(data)
-          this.setState({ tasks: arr, task: '', assignedTo: '', status: ''  })
-        })
-    }
-  }
+    user: ''
+  })
 
-  componentDidMount() { // When the page loads grab the data from the database and update the tasks array
+  state.getTable = _ => {
+    setState({ ...state })
+    // get table info from DB
     axios.get('/api/tables')
-      .then( ({data}) => {
-        console.log(data)
-        // this.setState({ 
-        // tasks: data })
-      }
-        )
+      .then(({data: table}) => {
+        console.log(table[0])
+        console.log(table)
+        setState({
+        //   tasks: data.tasks,
+          title: table[0].title,
+          owner: table[0].owner,
+        //   // task: [],
+          assigned: table[0].assigned,
+          dueDate: table[0].dueDate,
+          priority: table[0].priority,
+          status: table[0].status,
+        //   text: data.text,
+        //   timeline: data.timeline,
+        //   date: data.date,
+        //   numbers: data.numbers,
+        //   board: data.board,
+        //   user: data.user,
+        })
+        
+      })
 
 
   }
 
-  render () {
-    return (
-      <TaskContext.Provider value={this.state}>
-          <TaskForm />
-          <TaskDisplay />
-      </TaskContext.Provider>
-    )
-  }
+  React.useEffect(() => {
+    // on page load, get the profile
+    state.getTable()
+
+  }, [])
+
+
+  return (
+    <TaskContext.Provider value={state}>
+      <TaskDisplay />
+    </TaskContext.Provider>
+  )
+
 }
 
-export default Tasks
+export default TableDisplayPage

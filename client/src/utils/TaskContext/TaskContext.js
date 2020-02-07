@@ -4,6 +4,7 @@ const TaskContext = React.createContext({
   title: '',
   owner: '',
   task: [],
+  row: [],
   assigned: '',
   dueDate: '',
   priority: '',

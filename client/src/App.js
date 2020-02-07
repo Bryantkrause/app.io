@@ -14,7 +14,7 @@ import TaskPage from './pages/TaskPage'
 
 function App(props) {
 
-  const user = useAuth()
+  const user = ''
 
   return (
     <Container>

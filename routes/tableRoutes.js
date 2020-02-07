@@ -4,8 +4,8 @@ module.exports = app => {
     // retrieve all tables
     app.get('/api/tables', (req, res) => {
         Table.find()
-            .populate('user')
-            .populate('board')
+            // .populate('user')
+            // .populate('board')
             .then(table => res.json(table))
             .catch(e => console.log(e))
     })
