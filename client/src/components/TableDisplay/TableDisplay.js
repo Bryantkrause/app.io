@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const TaskDisplay = () => {
+const TableDisplay = () => {
   const classes = useStyles()
 
   const {
@@ -97,7 +97,7 @@ const TaskDisplay = () => {
   )
 }
 
-export default TaskDisplay
+export default TableDisplay
 
 {/* <Button size="small">{status}</Button>
   <Button size="small">{owner}</Button>

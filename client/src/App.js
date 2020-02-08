@@ -10,7 +10,7 @@ import BottomBarPage from './pages/BottomBarPage'
 import ProfileDisplayPage from './pages/ProfileDisplayPage'
 import BoardsPage from './pages/BoardsPage'
 import LandingPage from './components/LandingPage'
-import TaskPage from './pages/TaskPage'
+import TableDisplayPage from './pages/TablePage'
 
 function App(props) {
 
@@ -25,7 +25,7 @@ function App(props) {
             <Route exact path="/" component={LandingPage} {...props} />
             <Route exact path="/user" component={ProfileDisplayPage} {...props} />
             <Route exact path="/boards" component={BoardsPage} {...props} />
-            <Route exact path="/tasks" component={TaskPage} {...props} />
+            <Route exact path="/tables" component={TableDisplayPage} {...props} />
           </Switch>
           <BottomBarPage />
         </FirebaseContext.Provider>

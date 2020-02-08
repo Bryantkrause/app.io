@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import TaskContext from '../../utils/TaskContext'
-import TaskDisplay from '../../components/TaskDisplay'
+import TableDisplay from '../../components/TableDisplay'
 
 
 const TableDisplayPage = props => {
@@ -32,7 +32,7 @@ const TableDisplayPage = props => {
         console.log(table[0])
         console.log(table)
         setState({
-        //   tasks: data.tasks,
+          tasks: table[0].tasks,
           title: table[0].title,
           owner: table[0].owner,
         //   // task: [],
@@ -62,7 +62,7 @@ const TableDisplayPage = props => {
 
   return (
     <TaskContext.Provider value={state}>
-      <TaskDisplay />
+      <TableDisplay />
     </TaskContext.Provider>
   )
 
